@@ -1,0 +1,10 @@
+services:
+  nodejs:
+    build: ./docker/frontend
+    container_name: NODEJS
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./docker/frontend:/app
+    ports:
+      - '3000:3000'
