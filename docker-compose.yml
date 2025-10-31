@@ -2,21 +2,16 @@ services:
   nodejs:
     build: ./docker/frontend
     container_name: NODEJS
-    tty: true
-    stdin_open: true
     volumes:
       - ./docker/frontend:/app
     ports:
       - '3000:3000'
+
   laravel:
     build: ./docker/backend
     container_name: LARAVEL
-    tty: true
-    stdin_open: true
     volumes:
       - ./docker/backend:/var/www/html
-    ports:
-      - '9000:9000'
     depends_on:
       - db
   db:
