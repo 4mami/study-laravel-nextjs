@@ -6,6 +6,7 @@ import axios from 'axios';
 const http = axios.create({
     baseURL: 'http://localhost:8000',
     withCredentials: true,
+    withXSRFToken: true,
 });
 
 const Test = () => {
@@ -13,14 +14,14 @@ const Test = () => {
     const [password, setPassword] = useState('');
 
     const postData = async () => {
-        axios.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true }).then((res: any) => {
+        try {
+            await http.get('/sanctum/csrf-cookie');
+            const res = await http.post('/api/login', { email, password });
             console.log(res);
-            // ログイン処理
-            http.post('/api/login', {email, password}).then((res: any) => {
-                console.log(res);
-            })
-        });
-    }
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     return (
         <div>
