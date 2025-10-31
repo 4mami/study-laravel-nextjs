@@ -9,4 +9,4 @@ COPY package-lock.json ./
 
 RUN pnpm i
 
-CMD ["/bin/bash"]
+CMD ["pnpm", "dev"]
