@@ -42,7 +42,7 @@ const Page = (props: { params: Promise<{ id: string }> }) => {
             name: student.name,
         };
         // APIにリクエストを送信して、データを登録する
-        http.patch(`/api/students/${student.id}`, requestBody, {
+        http.put(`/api/students/${student.id}`, requestBody, {
             headers: {
                 'Content-Type': 'application/json'
             },
