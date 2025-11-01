@@ -16,7 +16,7 @@ const Test = () => {
     const postData = async () => {
         try {
             await http.get('/sanctum/csrf-cookie');
-            const res = await http.post('/api/login', { email, password });
+            const res = await http.post('/login', { email, password });
             console.log(res);
         } catch (e) {
             console.error(e);
