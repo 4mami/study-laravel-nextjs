@@ -12,6 +12,9 @@ COPY . /var/www/html
 RUN composer install --prefer-dist --no-scripts --no-dev && \
 composer dump-autoload --optimize
 
+RUN pecl install xdebug
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 COPY .env.example /var/www/html/.env
 
 RUN php artisan key:generate
