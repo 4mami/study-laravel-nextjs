@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -16,7 +17,7 @@ class StudentController extends Controller
     }
 
     // 登録
-    public function store(Request $request) {
+    public function store(StudentRequest $request) {
         $student = new Student();
         $student->name = $request->name;
         $student->save();

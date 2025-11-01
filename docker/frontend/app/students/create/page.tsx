@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
 
@@ -15,6 +16,8 @@ const http = axios.create({
 const Page = () => {
     // 生徒の名前を格納するstate
     const [name, setName] = useState('');
+    // エラーメッセージを格納するstate
+    const [errorMessage, setErrorMessage] = useState('');
     // router
     const router = useRouter();
 
@@ -29,9 +32,12 @@ const Page = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }).then(()=>{
+        }).then(() => {
             // 登録が完了したら、生徒一覧ページに遷移する
             router.push('/students');
+        }).catch((err: AxiosError) => {
+            // err.response.data.messageがエラーメッセージ
+            setErrorMessage(err.response.data.message);
         });
     }
 
@@ -49,6 +55,9 @@ const Page = () => {
                     setName(e.target.value);
                 }}
             />
+            <div className="py-1 px-4">
+                <p className="text-red-500">{errorMessage}</p>
+            </div>
             <div>
                 <button
                     className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-3"
