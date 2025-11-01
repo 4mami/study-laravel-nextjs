@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -11,7 +11,8 @@ const http = axios.create({
 });
 
 // 動的ルーティングのパスを取得するためにparamsを引数として受け取る
-const Page = ({ params }: { params: { id: string } }) => {
+const Page = (props: { params: Promise<{ id: string }> }) => {
+    const params = use(props.params);
     // 生徒のデータを格納するstate
     const [student, setStudent] = useState<any>({});
     // router
